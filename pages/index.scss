@@ -1,0 +1,138 @@
+$base-color: #F2F2F2;
+$white: #FFFFFF;
+
+body{
+  margin: 0;
+  background-color: $base-color;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+
+  .title {
+    text-align: center;
+  }
+
+  .page-wrapper {
+    // display: grid;
+    // grid-template-columns: auto;
+
+    @media (min-width: 700px) {
+      display: block;
+    }
+  }
+
+  .grid-container {
+    display: grid;
+    @media (min-width: 700px) and (max-width: 1024px) {
+      grid-template-columns: auto auto;
+    }
+
+    @media (min-width: 1024px) and (max-width: 1440px) {
+      grid-template-columns: auto auto auto auto;
+    }
+
+    @media (min-width: 1440px) {
+      grid-template-columns: auto auto auto auto;
+      justify-items: center;
+    }
+  }
+
+  .filter-container {
+    background-color: $white;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+
+    @media (min-width: 700px) {
+      float: left;
+    }
+  }
+
+  .filter-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .filters-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      border-bottom: solid 1px #6E6E6E;
+      line-height: 1.5;
+      text-align: center;
+      width: 150px;
+    }
+  }
+
+  .filters-value {
+    background-color: #C5E09B;
+    border-radius: 4px;
+    width: 70%;
+    padding: 3px;
+    text-align:center;
+    margin:15px;
+    cursor: pointer;
+  }
+
+  .filter-value-container {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: auto auto;
+  }
+
+  .spacex-container{
+    background-color: $white;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 5px;
+
+    .mission-image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #F2F2F2;
+      img {
+        max-width: 150px;
+        max-height: 150px;
+      }
+    }
+
+    .mission-name {
+      margin-top: 15px;
+      color: #29477F;
+      font-weight: bold;
+    }
+
+    .mission-detail {
+      margin-top: 10px;
+      font-weight: bold;
+
+      ul {
+        margin-top:5px;
+      }
+
+      span, ul {
+        font-weight: lighter!important;
+        color: #6C76A5;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    
+    span {
+      font-weight: normal!important;
+    }
+  }
+}
