@@ -24,34 +24,29 @@ const Filters = (props) => {
     '2020',
   ];
 
-  const [missionLaunchYear, setMissionLaunchYear] = useState('');
-  const [missionLaunchSuccess, setMissionLaunchSuccess] = useState('');
-  const [missionLandSuccess, setMissionLandSuccess] = useState('');
+  const [missionLaunchYear, setMissionLaunchYear] = useState(props.query.launch_year || '');
+  const [missionLaunchSuccess, setMissionLaunchSuccess] = useState(props.query.launch_success || '');
+  const [missionLandSuccess, setMissionLandSuccess] = useState(props.query.land_success || '');
 
   const setQueryParam = () => {
     let queryParam = '/?';
-    if (missionLaunchYear) {
-      queryParam += `&launch_year=${missionLaunchYear}`;
-    }
-    if (missionLaunchSuccess) {
-      queryParam += `&launch_success=${missionLaunchSuccess}`;
-    }
-    if (missionLandSuccess) {
-      queryParam += `&land_success=${missionLandSuccess}`;
-    }
+
+    queryParam += missionLaunchYear ? `&launch_year=${missionLaunchYear}` : '';
+    queryParam += missionLaunchSuccess ? `&launch_success=${missionLaunchSuccess}` : '';
+    queryParam += missionLandSuccess ? `&land_success=${missionLandSuccess}` : '';
+
     router.push(queryParam, undefined, { shallow: true });
   };
 
   useEffect(() => {
-    if (missionLaunchYear && setMissionLaunchSuccess && setMissionLandSuccess) {
-      setQueryParam();
-    }
+    setQueryParam();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [missionLaunchYear, missionLaunchSuccess, missionLandSuccess]);
 
   const filterYear = (year) => {
-    setMissionLaunchYear(year);
-    fetchSpaceXData(year, missionLaunchSuccess, missionLandSuccess).then(
+    const currYear = missionLaunchYear == year ? '' : year;
+    setMissionLaunchYear(currYear);
+    fetchSpaceXData(currYear, missionLaunchSuccess, missionLandSuccess).then(
       (res) => {
         props.updateMissionData(res);
       },
@@ -59,8 +54,9 @@ const Filters = (props) => {
   };
 
   const filterLaunch = (launch) => {
-    setMissionLaunchSuccess(launch);
-    fetchSpaceXData(missionLaunchYear, launch, missionLandSuccess).then(
+    const currLaunch = missionLaunchSuccess == launch ? '' : launch;
+    setMissionLaunchSuccess(currLaunch);
+    fetchSpaceXData(missionLaunchYear, currLaunch, missionLandSuccess).then(
       (res) => {
         props.updateMissionData(res);
       },
@@ -68,8 +64,9 @@ const Filters = (props) => {
   };
 
   const filterLand = (land) => {
-    setMissionLandSuccess(land);
-    fetchSpaceXData(missionLaunchYear, missionLaunchSuccess, land).then(
+    const currLand = missionLandSuccess == land ? '' : land;
+    setMissionLandSuccess(currLand);
+    fetchSpaceXData(missionLaunchYear, missionLaunchSuccess, currLand).then(
       (res) => {
         props.updateMissionData(res);
       },
@@ -85,7 +82,7 @@ const Filters = (props) => {
         {launchYears.map((data) => (
           <div
             key={data}
-            className="filters-value"
+            className={(missionLaunchYear == data)?"active filters-value": "filters-value"}
             onClick={() => filterYear(data)}
             aria-hidden="true"
           >
@@ -97,10 +94,10 @@ const Filters = (props) => {
         <span>Successfull Launch</span>
       </div>
       <div className="filter-value-container">
-        <div aria-hidden="true" className="filters-value" onClick={() => filterLaunch('true')}>
+        <div aria-hidden="true" className={(missionLaunchSuccess == 'true')? "active filters-value":"filters-value"} onClick={() => filterLaunch('true')}>
           True
         </div>
-        <div aria-hidden="true" className="filters-value" onClick={() => filterLaunch('false')}>
+        <div aria-hidden="true" className={(missionLaunchSuccess == 'false')? "active filters-value":"filters-value"} onClick={() => filterLaunch('false')}>
           False
         </div>
       </div>
@@ -108,10 +105,10 @@ const Filters = (props) => {
         <span>Successfull Landing</span>
       </div>
       <div className="filter-value-container">
-        <div aria-hidden="true" className="filters-value" onClick={() => filterLand('true')}>
+        <div aria-hidden="true" className={(missionLandSuccess == 'true')? "active filters-value":"filters-value"} onClick={() => filterLand('true')}>
           True
         </div>
-        <div aria-hidden="true" className="filters-value" onClick={() => filterLand('false')}>
+        <div aria-hidden="true" className={(missionLandSuccess == 'false')? "active filters-value":"filters-value"} onClick={() => filterLand('false')}>
           False
         </div>
       </div>

@@ -2,16 +2,18 @@
 import React from 'react';
 
 const Mission = ({ data }) => data
-  && data.map((spaceX) => (
-    <div key={spaceX.launch_year} className="spacex-container">
+  && data.map((spaceX, i) => {
+    const landSuccess = (spaceX.rocket.first_stage && spaceX.rocket.first_stage.cores) ? spaceX.rocket.first_stage.cores[0].land_success: '';
+    return(
+    <div key={i} className="spacex-container">
       <div className="mission-image">
-        <img alt={spaceX.mission_name} src={spaceX.links.mission_patch} />
+        <img width={150} height={150} alt={spaceX.mission_name} src={spaceX.links.mission_patch} />
       </div>
       <div className="mission-name">
-        {spaceX.mission_name}
+        <p>{spaceX.mission_name}
         {' '}
         #
-        {spaceX.flight_number}
+        {spaceX.flight_number}</p>
       </div>
       <div className="mission-detail">
         Mission Ids:
@@ -31,9 +33,9 @@ const Mission = ({ data }) => data
       </div>
       <div className="mission-detail">
         Successfull Landing:
-        <span>{spaceX.launch_success && spaceX.launch_success.toString()}</span>
+        <span>{landSuccess && landSuccess.toString()}</span>
       </div>
     </div>
-  ));
+  )});
 
 export default Mission;

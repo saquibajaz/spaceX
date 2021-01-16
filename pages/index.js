@@ -20,15 +20,15 @@ export async function getServerSideProps({ query }) {
 
   const res = await fetch(defaultQuery);
   const data = await res.json();
-  return { props: { data } };
+  return { props: { data, query } };
 }
-const SpaceX = ({ data }) => {
+const SpaceX = ({ data, query }) => {
   const [missionData, updateMissionData] = useState(data);
   return (
     <div className="container">
       <h2 className="title">SpaceX Launch Programs</h2>
       <div className="page-wrapper">
-        <Filters updateMissionData={updateMissionData} />
+        <Filters query={query} updateMissionData={updateMissionData} />
 
         <div className="grid-container">
           <Mission data={missionData} />

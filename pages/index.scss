@@ -77,6 +77,10 @@ body{
     text-align:center;
     margin:15px;
     cursor: pointer;
+
+    &.active {
+      background-color: #899c6a;
+    }
   }
 
   .filter-value-container {
@@ -96,16 +100,17 @@ body{
       align-items: center;
       justify-content: center;
       background-color: #F2F2F2;
-      img {
-        max-width: 150px;
-        max-height: 150px;
-      }
     }
 
     .mission-name {
       margin-top: 15px;
       color: #29477F;
       font-weight: bold;
+      overflow-wrap: break-word;
+
+      @media (min-width: 1440px) {
+        max-width: 160px;
+      }
     }
 
     .mission-detail {
