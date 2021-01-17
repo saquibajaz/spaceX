@@ -1,5 +1,8 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
+import Image from 'next/image';
+
+const myLoader = ({ src, width, quality }) => `${src}?w=${width}&q=${quality || 50}`;
 
 const Mission = ({ data }) => data
   && data.map((spaceX, i) => {
@@ -10,11 +13,12 @@ const Mission = ({ data }) => data
       // eslint-disable-next-line react/no-array-index-key
       <div key={i} className="spacex-container">
         <div className="mission-image">
-          <img
+          <Image
+            loader={myLoader}
+            src={spaceX.links.mission_patch}
+            alt={spaceX.mission_name}
             width={150}
             height={150}
-            alt={spaceX.mission_name}
-            src={spaceX.links.mission_patch}
           />
         </div>
         <div className="mission-name">
