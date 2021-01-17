@@ -18,3 +18,6 @@ npm i && npm run dev
 
 ## Lighthouse Report
 
+![alt Lighthouse Report](https://github.com/saquibajaz/spaceX/blob/main/lighthouse_report/report1.png?raw=true)
+![alt Lighthouse Report](https://github.com/saquibajaz/spaceX/blob/main/lighthouse_report/report2.png?raw=true)
+![alt Lighthouse Report](https://github.com/saquibajaz/spaceX/blob/main/lighthouse_report/report3.png?raw=true)
