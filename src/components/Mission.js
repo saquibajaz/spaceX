@@ -3,7 +3,9 @@ import React from 'react';
 
 const Mission = ({ data }) => data
   && data.map((spaceX, i) => {
-    const landSuccess = (spaceX.rocket.first_stage && spaceX.rocket.first_stage.cores) ? spaceX.rocket.first_stage.cores[0].land_success : '';
+    const landSuccess = spaceX.rocket.first_stage && spaceX.rocket.first_stage.cores
+      ? spaceX.rocket.first_stage.cores[0].land_success
+      : '';
     return (
       // eslint-disable-next-line react/no-array-index-key
       <div key={i} className="spacex-container">
@@ -37,7 +39,9 @@ const Mission = ({ data }) => data
         </div>
         <div className="mission-detail">
           Successfull Launch:
-          <span>{spaceX.launch_success && spaceX.launch_success.toString()}</span>
+          <span>
+            {spaceX.launch_success && spaceX.launch_success.toString()}
+          </span>
         </div>
         <div className="mission-detail">
           Successfull Landing:

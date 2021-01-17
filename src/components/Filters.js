@@ -24,23 +24,33 @@ const Filters = ({ updateMissionData, query }) => {
     '2020',
   ];
 
-  const [missionLaunchYear, setMissionLaunchYear] = useState(query.launch_year || '');
-  const [missionLaunchSuccess, setMissionLaunchSuccess] = useState(query.launch_success || '');
-  const [missionLandSuccess, setMissionLandSuccess] = useState(query.land_success || '');
+  const [missionLaunchYear, setMissionLaunchYear] = useState(
+    query.launch_year || '',
+  );
+  const [missionLaunchSuccess, setMissionLaunchSuccess] = useState(
+    query.launch_success || '',
+  );
+  const [missionLandSuccess, setMissionLandSuccess] = useState(
+    query.land_success || '',
+  );
 
   const setQueryParam = () => {
     let queryParam = '/?';
 
     queryParam += missionLaunchYear ? `&launch_year=${missionLaunchYear}` : '';
-    queryParam += missionLaunchSuccess ? `&launch_success=${missionLaunchSuccess}` : '';
-    queryParam += missionLandSuccess ? `&land_success=${missionLandSuccess}` : '';
+    queryParam += missionLaunchSuccess
+      ? `&launch_success=${missionLaunchSuccess}`
+      : '';
+    queryParam += missionLandSuccess
+      ? `&land_success=${missionLandSuccess}`
+      : '';
 
     router.push(queryParam, undefined, { shallow: true });
   };
 
   useEffect(() => {
     setQueryParam();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [missionLaunchYear, missionLaunchSuccess, missionLandSuccess]);
 
   const filterYear = (year) => {
@@ -82,7 +92,11 @@ const Filters = ({ updateMissionData, query }) => {
         {launchYears.map((data) => (
           <div
             key={data}
-            className={(missionLaunchYear === data) ? 'active filters-value' : 'filters-value'}
+            className={
+              missionLaunchYear === data
+                ? 'active filters-value'
+                : 'filters-value'
+            }
             onClick={() => filterYear(data)}
             aria-hidden="true"
           >
@@ -94,10 +108,26 @@ const Filters = ({ updateMissionData, query }) => {
         <span>Successfull Launch</span>
       </div>
       <div className="filter-value-container">
-        <div aria-hidden="true" className={(missionLaunchSuccess === 'true') ? 'active filters-value' : 'filters-value'} onClick={() => filterLaunch('true')}>
+        <div
+          aria-hidden="true"
+          className={
+            missionLaunchSuccess === 'true'
+              ? 'active filters-value'
+              : 'filters-value'
+          }
+          onClick={() => filterLaunch('true')}
+        >
           True
         </div>
-        <div aria-hidden="true" className={(missionLaunchSuccess === 'false') ? 'active filters-value' : 'filters-value'} onClick={() => filterLaunch('false')}>
+        <div
+          aria-hidden="true"
+          className={
+            missionLaunchSuccess === 'false'
+              ? 'active filters-value'
+              : 'filters-value'
+          }
+          onClick={() => filterLaunch('false')}
+        >
           False
         </div>
       </div>
@@ -105,10 +135,26 @@ const Filters = ({ updateMissionData, query }) => {
         <span>Successfull Landing</span>
       </div>
       <div className="filter-value-container">
-        <div aria-hidden="true" className={(missionLandSuccess === 'true') ? 'active filters-value' : 'filters-value'} onClick={() => filterLand('true')}>
+        <div
+          aria-hidden="true"
+          className={
+            missionLandSuccess === 'true'
+              ? 'active filters-value'
+              : 'filters-value'
+          }
+          onClick={() => filterLand('true')}
+        >
           True
         </div>
-        <div aria-hidden="true" className={(missionLandSuccess === 'false') ? 'active filters-value' : 'filters-value'} onClick={() => filterLand('false')}>
+        <div
+          aria-hidden="true"
+          className={
+            missionLandSuccess === 'false'
+              ? 'active filters-value'
+              : 'filters-value'
+          }
+          onClick={() => filterLand('false')}
+        >
           False
         </div>
       </div>

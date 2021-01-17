@@ -8,15 +8,9 @@ import Mission from '../src/components/Mission';
 export async function getServerSideProps({ query }) {
   let defaultQuery = 'https://api.spaceXdata.com/v3/launches?limit=100';
 
-  if (query.launch_year) {
-    defaultQuery += `&launch_year=${query.launch_year}`;
-  }
-  if (query.launch_success) {
-    defaultQuery += `&launch_success=${query.launch_success}`;
-  }
-  if (query.land_success) {
-    defaultQuery += `&land_success=${query.land_success}`;
-  }
+  defaultQuery += query.launch_year ? `&launch_year=${query.launch_year}` : '';
+  defaultQuery += query.launch_success ? `&launch_success=${query.launch_success}` : '';
+  defaultQuery += query.land_success ? `&land_success=${query.land_success}` : '';
 
   const res = await fetch(defaultQuery);
   const data = await res.json();
@@ -29,10 +23,10 @@ const SpaceX = ({ data, query }) => {
       <h2 className="title">SpaceX Launch Programs</h2>
       <div className="page-wrapper">
         <Filters query={query} updateMissionData={updateMissionData} />
-
         <div className="grid-container">
           <Mission data={missionData} />
         </div>
+        {missionData.length === 0 ? <div className="no-result-found">No Result Found :-(</div> : null}
       </div>
       <footer>
         <div>Developed by:</div>
